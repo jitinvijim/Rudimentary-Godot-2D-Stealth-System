@@ -18,7 +18,7 @@ Uses Area2D, combined with RayCast2D, both efficient and low cost. Area2D for a 
 - Attatch the visionCone.cs file to the Area2D VisionCone node. again with the Class name being the same as Node name
 - Now within your main scene, create an Enemy instance, and have its Path be a sibling node. Once you build the scene, in the Inspector you will be asked to attach a PathFollow2D node. 
 - There is some scripting in main.cs that is required. Attach a script file. From this project's main.cs you don't need lines 6, 13, 21 to 29 (for the Detected/Undetected Debug Text) and lines 31 to 34 (Reload Scene button).
-- Finally, add the Player node to a Group called "Player" (can be changed in [EnemyStealth.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/9b2c648cafc7cc3cc57685ce708be8018d02a902/enemy-src/EnemyStealth.cs#L90).
+- Finally, add the Player node to a Group called "Player" (can be changed in [EnemyStealth.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/9b2c648cafc7cc3cc57685ce708be8018d02a902/enemy-src/EnemyStealth.cs#L90)).
 - You should be all set. explore the Inspector for some useful exported parameters, build, and enjoy!
 
   Alternatively of course you could just copy-paste the entire thing
