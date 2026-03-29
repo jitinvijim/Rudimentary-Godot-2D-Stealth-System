@@ -1,16 +1,16 @@
-#Simple 2D stealth system on Godot (C#) that you can use on your own projects.
+# Simple 2D stealth system on Godot (C#) that you can use on your own projects.
 
-##Features
+## Features
 - Templated for easy plugging in.
 - Most properties can be edited in-engine, keeping it easy and usable.
 - Modular, can be reused for several mob entities. Can also be edited easily to have more features
 - Relatively low cost, but accurate and robust.
 - Reset Scene button for sanity. Can easily be removed
 
-##How it works
+## How it works
 Uses Area2D, combined with RayCast2D, both efficient and low cost. Area2D for a Vision Cone, RayCast2D for Line-Of-Sight
 
-##How to use
+## How to use
 - In your Enemy scene, create a child Node called EnemyStealth (this name can be changed to anything, edited in [Enemy.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/6dd335ab427c9378789824398371acbff618e570/enemy-src/Enemy.cs#L18) and [EnemyStealth.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/6dd335ab427c9378789824398371acbff618e570/enemy-src/EnemyStealth.cs#L4).
 - Add a child RayCast2D node to your EnemyStealth node, call it LOS ([EnemyStealth.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/6dd335ab427c9378789824398371acbff618e570/enemy-src/EnemyStealth.cs#L43).
 - Attatch a the enemyStealth.cs file to the EnemyStealth node. Godot requires the Class name to be the same as the Node name, so make sure it's the same.
@@ -24,8 +24,8 @@ Uses Area2D, combined with RayCast2D, both efficient and low cost. Area2D for a 
 
   Alternatively of course you could just copy-paste the entire thing
 
-###Please do raise issues if ever any arise.
+### Please do raise issues if ever any arise.
 
 
 
-##Thanks! And Happy Building!
+## Thanks! And Happy Building!
