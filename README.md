@@ -12,7 +12,7 @@ Uses Area2D, combined with RayCast2D, both efficient and low cost. Area2D for a 
 
 ## How to use
 - In your Enemy scene, create a child Node called EnemyStealth (this name can be changed to anything, edited in [Enemy.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/6dd335ab427c9378789824398371acbff618e570/enemy-src/Enemy.cs#L18) and [EnemyStealth.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/6dd335ab427c9378789824398371acbff618e570/enemy-src/EnemyStealth.cs#L4).
-- Add a child RayCast2D node to your EnemyStealth node, call it LOS ([EnemyStealth.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/6dd335ab427c9378789824398371acbff618e570/enemy-src/EnemyStealth.cs#L43).
+- Add a child RayCast2D node to your EnemyStealth node, call it LOS ([EnemyStealth.cs](https://github.com/jitinvijim/Rudimentary-Godot-2D-Stealth-System/blob/6dd335ab427c9378789824398371acbff618e570/enemy-src/EnemyStealth.cs#L43)).
 - Attatch a the enemyStealth.cs file to the EnemyStealth node. Godot requires the Class name to be the same as the Node name, so make sure it's the same.
 - Within the Enemy scene again child Area2D node called VisionCone. create two child nodes underneath, called VisionConeVisual (Polygon2D) and VisionConeCollisionShape (CollisionPolygon2D).
   VisionConeVisual gives it the colour, while VisionConeCollisionShape gives it its shape. When editing its shape, just change VisionConeCollisionShape, VisionConeVisual inherits from it.
