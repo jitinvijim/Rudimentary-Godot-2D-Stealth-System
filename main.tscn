@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bcxr5jlqt210p"]
+
+[ext_resource type="PackedScene" uid="uid://cwiq00u65128l" path="res://player.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dybejfeexin2p" path="res://Main.cs" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cdm256jvceild" path="res://wall.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://txobbb647mk7" path="res://enemy.tscn" id="3_h2yge"]
+
+[sub_resource type="Curve2D" id="Curve2D_lquwl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 106, 75, 0, 0, 0, 0, 263, 64, 0, 0, 0, 0, 367, 56, 0, 0, 0, 0, 631, 56, 0, 0, 0, 0, 911.1632, 60.383278, 0, 0, 0, 0, 911, 192, 0, 0, 0, 0, 1023, 192, 0, 0, 0, 0, 1021, 532, 0, 0, 0, 0, 805.0131, 494.7483, 0, 0, 0, 0, 663, 488, 0, 0, 0, 0, 671, 728, 0, 0, 0, 0, 303, 728, 0, 0, 0, 0, 383, 504, 0, 0, 0, 0, 383, 384, 0, 0, 0, 0, 494.21948, 368.26587, 0, 0, 0, 0, 623, 384, 0, 0, 0, 0, 623, 776, 0, 0, 0, 0, 103, 768, 0, 0, 0, 0, 106, 501, 0, 0, 0, 0, 106, 75)
+}
+point_count = 20
+
+[node name="MainScene" type="Node2D" unique_id=908059382]
+script = ExtResource("1_lquwl")
+
+[node name="VisibilityCheck" type="Label" parent="." unique_id=262346196]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 527.0
+offset_right = 618.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Undetected"
+
+[node name="Walls" parent="." unique_id=1775537236 groups=["Walls"] instance=ExtResource("2_h2yge")]
+position = Vector2(520, 168)
+
+[node name="Walls2" parent="." unique_id=2091193902 groups=["Walls"] instance=ExtResource("2_h2yge")]
+position = Vector2(920, 384)
+
+[node name="Walls3" parent="." unique_id=1982882175 groups=["Walls"] instance=ExtResource("2_h2yge")]
+position = Vector2(488, 616)
+
+[node name="Walls4" parent="." unique_id=1722084726 groups=["Walls"] instance=ExtResource("2_h2yge")]
+position = Vector2(192, 360)
+
+[node name="Enemy" parent="." unique_id=329567124 node_paths=PackedStringArray("PathFollow") instance=ExtResource("3_h2yge")]
+PathFollow = NodePath("../EnemyPath/PathFollow2D")
+
+[node name="Player" parent="." unique_id=1234257637 groups=["Player"] instance=ExtResource("1_0xm2m")]
+position = Vector2(1124, 39)
+Speed = 400.0
+
+[node name="EnemyPath" type="Path2D" parent="." unique_id=551862189]
+position = Vector2(1, 0)
+curve = SubResource("Curve2D_lquwl")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="EnemyPath" unique_id=604197380]
+position = Vector2(106, 75)
+rotation = -0.06994939
+
+[node name="ResetButton" type="Button" parent="." unique_id=1917717823]
+offset_left = 1201.0
+offset_top = 730.0
+offset_right = 1279.0
+offset_bottom = 800.0
+text = "Reset
+Scene"
+
+[connection signal="pressed" from="ResetButton" to="." method="OnResetButtonPressed"]
