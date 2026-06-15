@@ -26,7 +26,7 @@ theme_override_font_sizes/font_size = 40
 text = "Undetected"
 
 [node name="Walls" parent="." unique_id=1775537236 groups=["Walls"] instance=ExtResource("2_h2yge")]
-position = Vector2(520, 168)
+position = Vector2(520, 169)
 
 [node name="Walls2" parent="." unique_id=2091193902 groups=["Walls"] instance=ExtResource("2_h2yge")]
 position = Vector2(920, 384)

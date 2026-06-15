@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using Godot;
 
 [Tool]
@@ -42,6 +43,8 @@ public partial class EnemyStealth : Node
 		_visionCone = GetNode<VisionCone>("../VisionCone");
 		_los = GetNode<RayCast2D>("LOS");
 		_sweepAngle = Mathf.DegToRad(SweepAngleDegrees);
+
+		_los.AddException(_enemy);
 	}
 
 	public override void _Process(double delta)
@@ -85,24 +88,32 @@ public partial class EnemyStealth : Node
 			}
 		}
 
+		//GD.Print("Player in cone :", playerInCone);
 		if (playerInCone)
 		{
 			var player = GetTree().GetFirstNodeInGroup("Player") as Node2D;
 			_los.TargetPosition = _los.ToLocal(player.GlobalPosition);
 			_los.ForceRaycastUpdate();
 
+			//GD.Print("Is Colliding: ", _los.IsColliding());
+			GD.Print("Collider: ", _los.GetCollider());
+			
+			GD.Print("Entering Collision LOS collision if statement");
 			if (!_los.IsColliding() || _los.GetCollider() is Player)
 			{
-				if (!_playerDetected)
+				GD.Print("_playerDected flag: ", _playerDetected);
+				if (!_playerDetected) //changing the state of _playerdetected
 				{
+					GD.Print("player detected");
 					_playerDetected = true;
 					_patrolling = false;
 					_visionCone.SetDetectedColor(true);
 					EmitSignal(SignalName.PlayerDetected);
+				
 				}
 			}
 		}
-		else if (_playerDetected)
+		else if (_playerDetected) 
 		{
 			_playerDetected = false;
 			_patrolling = true;

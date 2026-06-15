@@ -34,5 +34,8 @@ polygon = PackedVector2Array(62, 36, 62, -64, 898, -396, 898, 372)
 
 [node name="EnemyStealth" type="Node" parent="." unique_id=1942559721]
 script = ExtResource("3_qi2p4")
+Sweep = true
+SweepAngleDegrees = 45.0
+SweepSpeed = 1.0
 
 [node name="LOS" type="RayCast2D" parent="EnemyStealth" unique_id=1607176006]
