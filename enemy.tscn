@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://txobbb647mk7"]
 
 [ext_resource type="Texture2D" uid="uid://bu4e5urt37xtt" path="res://evilIcon.png" id="1_7k104"]
-[ext_resource type="Script" uid="uid://ba1fkty6mrqyp" path="res://enemy-src/Enemy.cs" id="1_iifgy"]
+[ext_resource type="Script" uid="uid://ba1fkty6mrqyp" path="res://enemy-src/EnemyMain.cs" id="1_iifgy"]
 [ext_resource type="Script" uid="uid://dlotf5xpxfnfk" path="res://enemy-src/VisionCone.cs" id="2_qi2p4"]
-[ext_resource type="Script" uid="uid://06y0x4j2e4i1" path="res://enemy-src/EnemyStealth.cs" id="3_qi2p4"]
+[ext_resource type="Script" uid="uid://dgrhaw1r1b40h" path="res://enemy-src/Patrolling.cs" id="5_wujgv"]
+[ext_resource type="Script" uid="uid://dh754spo8tr1j" path="res://enemy-src/Chasing.cs" id="6_hb8ge"]
+[ext_resource type="Script" uid="uid://b2t38crmfq7ip" path="res://enemy-src/Searching.cs" id="7_e1ltt"]
+[ext_resource type="Script" uid="uid://mugfk56sujnq" path="res://enemy-src/Returning.cs" id="8_hb8ge"]
+[ext_resource type="Script" uid="uid://v1f1slhfnork" path="res://enemy-src/EnemyFSM.cs" id="9_e1ltt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
 size = Vector2(122, 126)
 
-[node name="Enemy" type="CharacterBody2D" unique_id=329567124]
+[node name="EnemyMain" type="CharacterBody2D" unique_id=329567124]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_iifgy")
 
@@ -32,10 +36,20 @@ polygon = PackedVector2Array(60, -52, 62, 52, 324, 76, 312, -90, 60, -52)
 position = Vector2(-2, 12)
 polygon = PackedVector2Array(62, 36, 62, -64, 898, -396, 898, 372)
 
-[node name="EnemyStealth" type="Node" parent="." unique_id=1942559721]
-script = ExtResource("3_qi2p4")
-Sweep = true
-SweepAngleDegrees = 45.0
-SweepSpeed = 1.0
+[node name="LOS" type="RayCast2D" parent="." unique_id=1607176006]
+scale = Vector2(2, 2)
 
-[node name="LOS" type="RayCast2D" parent="EnemyStealth" unique_id=1607176006]
+[node name="Patrolling" type="Node" parent="." unique_id=268425063 groups=["FSM States"]]
+script = ExtResource("5_wujgv")
+
+[node name="Chasing" type="Node" parent="." unique_id=127478419 groups=["FSM States"]]
+script = ExtResource("6_hb8ge")
+
+[node name="Searching" type="Node" parent="." unique_id=591914488 groups=["FSM States"]]
+script = ExtResource("7_e1ltt")
+
+[node name="Returning" type="Node" parent="." unique_id=1229059406 groups=["FSM States"]]
+script = ExtResource("8_hb8ge")
+
+[node name="EnemyFSM" type="Node" parent="." unique_id=1576193560]
+script = ExtResource("9_e1ltt")

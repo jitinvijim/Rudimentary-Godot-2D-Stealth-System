@@ -34,11 +34,14 @@ position = Vector2(920, 384)
 [node name="Walls3" parent="." unique_id=1982882175 groups=["Walls"] instance=ExtResource("2_h2yge")]
 position = Vector2(488, 616)
 
-[node name="Walls4" parent="." unique_id=1722084726 groups=["Walls"] instance=ExtResource("2_h2yge")]
-position = Vector2(192, 360)
+[node name="Walls4" parent="." unique_id=232768893 groups=["Walls"] instance=ExtResource("2_h2yge")]
+position = Vector2(224, 384)
 
 [node name="Enemy" parent="." unique_id=329567124 node_paths=PackedStringArray("PathFollow") instance=ExtResource("3_h2yge")]
-PathFollow = NodePath("../EnemyPath/PathFollow2D")
+PathFollow = NodePath("../EnemyPath/EnemyPathFollow2D")
+Sweep = true
+SweepAngleDegrees = 45.0
+SweepSpeed = 1.0
 
 [node name="Player" parent="." unique_id=1234257637 groups=["Player"] instance=ExtResource("1_0xm2m")]
 position = Vector2(1124, 39)
@@ -48,7 +51,7 @@ Speed = 400.0
 position = Vector2(1, 0)
 curve = SubResource("Curve2D_lquwl")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="EnemyPath" unique_id=604197380]
+[node name="EnemyPathFollow2D" type="PathFollow2D" parent="EnemyPath" unique_id=604197380]
 position = Vector2(106, 75)
 rotation = -0.06994939
 
