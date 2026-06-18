@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://txobbb647mk7"]
 
 [ext_resource type="Texture2D" uid="uid://bu4e5urt37xtt" path="res://evilIcon.png" id="1_7k104"]
-[ext_resource type="Script" uid="uid://ba1fkty6mrqyp" path="res://enemy-src/EnemyMain.cs" id="1_iifgy"]
-[ext_resource type="Script" uid="uid://dlotf5xpxfnfk" path="res://enemy-src/VisionCone.cs" id="2_qi2p4"]
-[ext_resource type="Script" uid="uid://dgrhaw1r1b40h" path="res://enemy-src/Patrolling.cs" id="5_wujgv"]
-[ext_resource type="Script" uid="uid://dh754spo8tr1j" path="res://enemy-src/Chasing.cs" id="6_hb8ge"]
-[ext_resource type="Script" uid="uid://b2t38crmfq7ip" path="res://enemy-src/Searching.cs" id="7_e1ltt"]
-[ext_resource type="Script" uid="uid://mugfk56sujnq" path="res://enemy-src/Returning.cs" id="8_hb8ge"]
-[ext_resource type="Script" uid="uid://v1f1slhfnork" path="res://enemy-src/EnemyFSM.cs" id="9_e1ltt"]
+[ext_resource type="Script" uid="uid://ba1fkty6mrqyp" path="res://src/enemy/EnemyMain.cs" id="1_iifgy"]
+[ext_resource type="Script" uid="uid://dlotf5xpxfnfk" path="res://src/enemy/VisionCone.cs" id="2_qi2p4"]
+[ext_resource type="Script" uid="uid://dgrhaw1r1b40h" path="res://src/enemy/Patrolling.cs" id="5_wujgv"]
+[ext_resource type="Script" uid="uid://dh754spo8tr1j" path="res://src/enemy/Chasing.cs" id="6_hb8ge"]
+[ext_resource type="Script" uid="uid://b2t38crmfq7ip" path="res://src/enemy/Searching.cs" id="7_e1ltt"]
+[ext_resource type="Script" uid="uid://mugfk56sujnq" path="res://src/enemy/Returning.cs" id="8_hb8ge"]
+[ext_resource type="Script" uid="uid://v1f1slhfnork" path="res://src/enemy/EnemyFSM.cs" id="9_e1ltt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
 size = Vector2(122, 126)
