@@ -8,7 +8,9 @@ public partial class Chasing : State
 
 	public VisionCone _visionCone;
 
+	public Node2D _player;
 	private bool _playerDetected = true;
+
 
 	[Signal] public delegate void PlayerDetectedEventHandler();
 
@@ -25,15 +27,20 @@ public partial class Chasing : State
 	{
 		_enemy = GetParent<EnemyMain>();
 		_visionCone = GetNode<VisionCone>("../VisionCone");
+		_player = GetTree().GetFirstNodeInGroup("Player") as Node2D;
 	}
 
     public override void PhysicsUpdate(double delta)
     {
+
+		_enemy.GlobalPosition = _enemy.GlobalPosition.MoveToward(_player.GlobalPosition, _enemy.ChasingSpeed * (float)delta);
+		
+		
         _playerDetected = _enemy.PlayerDetector();
 
 		if(_playerDetected == false)
 		{
-			enemyFSM.TransitionTo("Patrolling");
+			enemyFSM.TransitionTo("Returning");
 		} 
     }
 

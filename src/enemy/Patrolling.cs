@@ -13,12 +13,12 @@ public partial class Patrolling : State
 	private float SweepAngleRad => Mathf.DegToRad(_enemy.SweepAngleDegrees); //kind of an inline thing. when _enemy is initialized, SweepAngleRad should also be initialized as such
 
 	private bool _playerDetected = false;
-	[Signal] public delegate void PlayerUndetectedEventHandler(); //has to b e removed, this is just for test
+	//[Signal] public delegate void PlayerUndetectedEventHandler(); //has to b e removed, this is just for test
 	public override void Enter()
 	{
 		GD.Print("Currently in Patrolling State");
 		_visionCone.SetDetectedColor(false);
-		EmitSignal(SignalName.PlayerUndetected); //has to be removed. this is just for test.
+		//EmitSignal(SignalName.PlayerUndetected); //has to be removed. this is just for test.
 	}
 	public override void Ready()
 	{

@@ -72,9 +72,9 @@ public partial class EnemyMain : CharacterBody2D
 
 		 //Stealth System Signal Connections
         var chasing = GetNode<Chasing>("Chasing");
-		var patrolling = GetNode<Patrolling>("Patrolling");
+		var returning = GetNode<Returning>("Returning");
 		chasing.PlayerDetected += () => EmitSignal(SignalName.PlayerDetected);
-		patrolling.PlayerUndetected += () => EmitSignal(SignalName.PlayerUndetected);
+		returning.PlayerUndetected += () => EmitSignal(SignalName.PlayerUndetected);
 		
     }
 

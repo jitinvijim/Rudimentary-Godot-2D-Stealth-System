@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bcxr5jlqt210p"]
 
-[ext_resource type="PackedScene" uid="uid://cwiq00u65128l" path="res://player.tscn" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://dybejfeexin2p" path="res://Main.cs" id="1_lquwl"]
-[ext_resource type="PackedScene" uid="uid://cdm256jvceild" path="res://wall.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://txobbb647mk7" path="res://enemy.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://dybejfeexin2p" path="res://Main.cs" id="1_3cfgd"]
+[ext_resource type="PackedScene" uid="uid://cdm256jvceild" path="res://wall.tscn" id="2_fyndt"]
+[ext_resource type="PackedScene" uid="uid://txobbb647mk7" path="res://enemy.tscn" id="3_kmhfv"]
+[ext_resource type="PackedScene" uid="uid://cwiq00u65128l" path="res://player.tscn" id="4_rlaii"]
 
 [sub_resource type="Curve2D" id="Curve2D_lquwl"]
 _data = {
@@ -12,7 +12,7 @@ _data = {
 point_count = 20
 
 [node name="MainScene" type="Node2D" unique_id=908059382]
-script = ExtResource("1_lquwl")
+script = ExtResource("1_3cfgd")
 
 [node name="VisibilityCheck" type="Label" parent="." unique_id=262346196]
 anchors_preset = 5
@@ -25,25 +25,25 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Undetected"
 
-[node name="Walls" parent="." unique_id=1775537236 groups=["Walls"] instance=ExtResource("2_h2yge")]
-position = Vector2(520, 169)
+[node name="Walls" parent="." unique_id=1775537236 groups=["Walls"] instance=ExtResource("2_fyndt")]
+position = Vector2(519, 169)
 
-[node name="Walls2" parent="." unique_id=2091193902 groups=["Walls"] instance=ExtResource("2_h2yge")]
+[node name="Walls2" parent="." unique_id=2091193902 groups=["Walls"] instance=ExtResource("2_fyndt")]
 position = Vector2(920, 384)
 
-[node name="Walls3" parent="." unique_id=1982882175 groups=["Walls"] instance=ExtResource("2_h2yge")]
+[node name="Walls3" parent="." unique_id=1982882175 groups=["Walls"] instance=ExtResource("2_fyndt")]
 position = Vector2(488, 616)
 
-[node name="Walls4" parent="." unique_id=232768893 groups=["Walls"] instance=ExtResource("2_h2yge")]
+[node name="Walls4" parent="." unique_id=232768893 groups=["Walls"] instance=ExtResource("2_fyndt")]
 position = Vector2(224, 384)
 
-[node name="Enemy" parent="." unique_id=329567124 node_paths=PackedStringArray("PathFollow") instance=ExtResource("3_h2yge")]
+[node name="Enemy" parent="." unique_id=329567124 node_paths=PackedStringArray("PathFollow") instance=ExtResource("3_kmhfv")]
 PathFollow = NodePath("../EnemyPath/EnemyPathFollow2D")
 Sweep = true
 SweepAngleDegrees = 45.0
 SweepSpeed = 1.0
 
-[node name="Player" parent="." unique_id=1234257637 groups=["Player"] instance=ExtResource("1_0xm2m")]
+[node name="Player" parent="." unique_id=1234257637 groups=["Player"] instance=ExtResource("4_rlaii")]
 position = Vector2(1124, 39)
 Speed = 400.0
 
