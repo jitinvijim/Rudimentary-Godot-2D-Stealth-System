@@ -10,15 +10,17 @@ public partial class Patrolling : State
 	private float _sweepAngle = 0.0f;
 	private int _lookDirection = 1; //1 if sweep is moving positive (down and right), -1 if moving negative (up and left)
 
-	private float SweepAngleRad => Mathf.DegToRad(_enemy.SweepAngleDegrees); //kind of an inline thing. when _enemy is initialized, SweepAngleRad should also be initialized as such
+	private float SweepAngleRad => Mathf.DegToRad(_enemy.PatrolSweepAngleDegrees); //kind of an inline thing. when _enemy is initialized, SweepAngleRad should also be initialized as such
 
 	private bool _playerDetected = false;
-	//[Signal] public delegate void PlayerUndetectedEventHandler(); //has to b e removed, this is just for test
+	[Signal] public delegate void PatrollingSignalEventHandler(); //can to be removed, this is just for label debug on game screen
+
 	public override void Enter()
 	{
+		
 		GD.Print("Currently in Patrolling State");
 		_visionCone.SetDetectedColor(false);
-		//EmitSignal(SignalName.PlayerUndetected); //has to be removed. this is just for test.
+		EmitSignal(SignalName.PatrollingSignal); //can to be removed, this is just for label debug on game screen
 	}
 	public override void Ready()
 	{
@@ -29,7 +31,7 @@ public partial class Patrolling : State
 	}
 	public override void PhysicsUpdate(double delta)
 	{
-		if(_enemy.Sweep)
+		if(_enemy.PatrolSweep)
 		{
 			SweepRotation((float)delta); //write SweepRotation()
 		}
@@ -52,7 +54,7 @@ public partial class Patrolling : State
 
 	public void SweepRotation(float delta)
 	{
-		_sweepAngle += _enemy.SweepSpeed * delta * _lookDirection;
+		_sweepAngle += _enemy.PatrolSweepRate * delta * _lookDirection;
 		if(_sweepAngle >= SweepAngleRad)
 		{
 			_lookDirection = -1;
@@ -64,7 +66,3 @@ public partial class Patrolling : State
 	}
 
 }
-
-/*
-this should have all patrolling logic, and send a signal out to enemyLogic when player is detected. restarts again when returning is over.
-*/

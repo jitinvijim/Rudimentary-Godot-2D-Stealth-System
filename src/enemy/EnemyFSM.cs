@@ -27,8 +27,8 @@ public partial class EnemyFSM : Node
             GD.Print(key);
         }
 
+        CallDeferred("EnterInitialState");  //defers the commands in the function till the end of the frame
         _currentState = _states["Patrolling"];
-        _currentState.Enter();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -53,5 +53,11 @@ public partial class EnemyFSM : Node
         _currentState = _states[nextState];
         _currentState.Enter();
     }
+
+    public void EnterInitialState() //now we run the deferred call
+    {
+        _currentState.Enter();
+    }
+    
 
 }

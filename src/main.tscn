@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://bcxr5jlqt210p"]
 
-[ext_resource type="Script" uid="uid://dybejfeexin2p" path="res://Main.cs" id="1_3cfgd"]
+[ext_resource type="Script" uid="uid://dybejfeexin2p" path="res://src/Main.cs" id="1_3cfgd"]
 [ext_resource type="PackedScene" uid="uid://cdm256jvceild" path="res://wall.tscn" id="2_fyndt"]
 [ext_resource type="PackedScene" uid="uid://txobbb647mk7" path="res://enemy.tscn" id="3_kmhfv"]
 [ext_resource type="PackedScene" uid="uid://cwiq00u65128l" path="res://player.tscn" id="4_rlaii"]
+[ext_resource type="Texture2D" uid="uid://dkjdskhpuhkns" path="res://playerLastSeen.png" id="5_kmhfv"]
+[ext_resource type="Script" uid="uid://cmv8k35syp7jr" path="res://src/player/PlayerLastSeenViz.cs" id="6_rlaii"]
 
 [sub_resource type="Curve2D" id="Curve2D_lquwl"]
 _data = {
@@ -14,7 +16,7 @@ point_count = 20
 [node name="MainScene" type="Node2D" unique_id=908059382]
 script = ExtResource("1_3cfgd")
 
-[node name="VisibilityCheck" type="Label" parent="." unique_id=262346196]
+[node name="StateCheck" type="Label" parent="." unique_id=262346196]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -23,10 +25,9 @@ offset_right = 618.0
 offset_bottom = 23.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
-text = "Undetected"
 
 [node name="Walls" parent="." unique_id=1775537236 groups=["Walls"] instance=ExtResource("2_fyndt")]
-position = Vector2(519, 169)
+position = Vector2(518, 169)
 
 [node name="Walls2" parent="." unique_id=2091193902 groups=["Walls"] instance=ExtResource("2_fyndt")]
 position = Vector2(920, 384)
@@ -39,9 +40,9 @@ position = Vector2(224, 384)
 
 [node name="Enemy" parent="." unique_id=329567124 node_paths=PackedStringArray("PathFollow") instance=ExtResource("3_kmhfv")]
 PathFollow = NodePath("../EnemyPath/EnemyPathFollow2D")
-Sweep = true
-SweepAngleDegrees = 45.0
-SweepSpeed = 1.0
+PatrolSweep = true
+PatrolSweepAngleDegrees = 45.0
+SearchSweepRate = 100.0
 
 [node name="Player" parent="." unique_id=1234257637 groups=["Player"] instance=ExtResource("4_rlaii")]
 position = Vector2(1124, 39)
@@ -62,5 +63,10 @@ offset_right = 1279.0
 offset_bottom = 800.0
 text = "Reset
 Scene"
+
+[node name="PlayerLastSeenViz" type="Sprite2D" parent="." unique_id=861354711]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_kmhfv")
+script = ExtResource("6_rlaii")
 
 [connection signal="pressed" from="ResetButton" to="." method="OnResetButtonPressed"]

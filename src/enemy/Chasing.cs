@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 
@@ -12,15 +13,13 @@ public partial class Chasing : State
 	private bool _playerDetected = true;
 
 
-	[Signal] public delegate void PlayerDetectedEventHandler();
+	[Signal] public delegate void ChasingSignalEventHandler();
 
 	public override void Enter()
 	{
-
 		GD.Print("Currently in Chasing State");
 		_visionCone.SetDetectedColor(true);
-		EmitSignal(SignalName.PlayerDetected);
-		//probably a signal saying PlayerDetected
+		EmitSignal(SignalName.ChasingSignal);
 	}
 
 	public override void Ready()
@@ -32,15 +31,19 @@ public partial class Chasing : State
 
     public override void PhysicsUpdate(double delta)
     {
-
+		var _lookAngle = (_player.GlobalPosition - _enemy.GlobalPosition).Angle();
+		_enemy.GlobalRotation = Mathf.LerpAngle(_enemy.GlobalRotation, _lookAngle, _enemy.BankingSpeed * (float)delta);
 		_enemy.GlobalPosition = _enemy.GlobalPosition.MoveToward(_player.GlobalPosition, _enemy.ChasingSpeed * (float)delta);
+		_enemy.MoveAndSlide();
+		
 		
 		
         _playerDetected = _enemy.PlayerDetector();
 
 		if(_playerDetected == false)
 		{
-			enemyFSM.TransitionTo("Returning");
+			_enemy._playerLastSeenPos = _player.GlobalPosition;
+			enemyFSM.TransitionTo("Searching");
 		} 
     }
 

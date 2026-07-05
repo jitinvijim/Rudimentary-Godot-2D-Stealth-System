@@ -1,3 +1,4 @@
+using System.Dynamic;
 using Godot;
 
 [Tool]
@@ -10,30 +11,41 @@ public partial class EnemyMain : CharacterBody2D
 	[Export] public float ChasingSpeed {get; set;} = 300.0f;
 	[Export] public float BankingSpeed { get; set; } = 2.0f;
 
-	[ExportCategory("Sweep")]
+
+	[ExportCategory("Patrol Sweep")]
 	private bool _sweep = false;
-	[Export] public bool Sweep
+	[Export] public bool PatrolSweep
 	{
 		get => _sweep;
 		set
 		{
 			_sweep = value;
-			SweepAngleDegrees = value ? 45f : 0f;
-			SweepSpeed = value ? 1.0f : 0f;
+			PatrolSweepAngleDegrees = value ? 45f : 0f;
+			PatrolSweepRate = value ? 2.0f : 0f;
 			NotifyPropertyListChanged();
 		}
 	}
 	[ExportGroup("Sweep Settings")]
-	[Export] public float SweepAngleDegrees {get; set;}
-	[Export] public float SweepSpeed {get; set;}
+	[Export] public float PatrolSweepAngleDegrees {get; set;} = 330.0f;
+	[Export] public float PatrolSweepRate {get; set;} = 2.0f;
+
+	[ExportCategory("Search Sweep")]
+	[Export] public float SearchSweepAngleDegrees { get; set; } = 300.0f;
+	[Export] public float SearchSweepRate {get; set;} = 10.0f;
+
 
 
 	//Stealth System Signals
-	[Signal] public delegate void PlayerDetectedEventHandler();
-	[Signal] public delegate void PlayerUndetectedEventHandler();
+	[Signal] public delegate void PatrollingSignalEventHandler();
+	[Signal] public delegate void ChasingSignalEventHandler();
+	[Signal] public delegate void SearchingSignalEventHandler();
+	[Signal] public delegate void ReturningSignalEventHandler();
 
 	private VisionCone _visionCone;
 	private RayCast2D _los;
+
+	public Vector2 ? _playerLastSeenPos;
+
 	
 	public bool PlayerDetector()
 	{
@@ -71,15 +83,17 @@ public partial class EnemyMain : CharacterBody2D
 		_los = GetNode<RayCast2D>("LOS");
 
 		 //Stealth System Signal Connections
+		var patrolling = GetNode<Patrolling>("Patrolling");
         var chasing = GetNode<Chasing>("Chasing");
+		var searching = GetNode<Searching>("Searching");
 		var returning = GetNode<Returning>("Returning");
-		chasing.PlayerDetected += () => EmitSignal(SignalName.PlayerDetected);
-		returning.PlayerUndetected += () => EmitSignal(SignalName.PlayerUndetected);
+
+		patrolling.PatrollingSignal += () => EmitSignal(SignalName.PatrollingSignal);
+		chasing.ChasingSignal += () => EmitSignal(SignalName.ChasingSignal);
+		searching.SearchingSignal += () => EmitSignal(SignalName.SearchingSignal);
+		returning.ReturningSignal += () => EmitSignal(SignalName.ReturningSignal);
 		
-    }
-
-	
-
+    }	
 }
 
 	

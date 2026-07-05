@@ -12,15 +12,14 @@ public partial class Returning : State
     private Vector2 _targetPosition;
 
 
-    [Signal] public delegate void PlayerUndetectedEventHandler();
+    [Signal] public delegate void ReturningSignalEventHandler();
 
 	public override void Enter()
 	{
 
 		GD.Print("Currently in Returning State");
 		_visionCone.SetDetectedColor(false);
-		EmitSignal(SignalName.PlayerUndetected);
-		//probably a signal saying PlayerDetected
+		EmitSignal(SignalName.ReturningSignal);
 
         var _enemyLocalPosition = _enemyPath.ToLocal(_enemy.GlobalPosition);
         _closestOffset = _enemyPath.Curve.GetClosestOffset(_enemyLocalPosition); //finds the closest _enemy.PathFollow.Progress this point is
@@ -37,8 +36,13 @@ public partial class Returning : State
 
     public override void PhysicsUpdate(double delta)
     {
-        GD.Print("Returning to", _targetPosition);
+        if(_enemy.PlayerDetector())
+        {
+            enemyFSM.TransitionTo("Chasing");
+        }
         _enemy.GlobalPosition = _enemy.GlobalPosition.MoveToward(_targetPosition, _enemy.PatrollingSpeed * (float)delta);
+        var _lookAngle = (_targetPosition - _enemy.GlobalPosition).Angle();
+		_enemy.GlobalRotation = Mathf.LerpAngle(_enemy.GlobalRotation, _lookAngle, _enemy.BankingSpeed * (float)delta);
 
         if(_enemy.GlobalPosition == _targetPosition)
         {
@@ -46,12 +50,5 @@ public partial class Returning : State
             enemyFSM.TransitionTo("Patrolling");
         }
     }
-
-
-
 	
 }
-
-/*
-this file should contain a travel to nearest point of path or something.
-*/
